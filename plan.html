@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mój Plan</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="lesson1.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Strona Główna</a></li>
+                <li><a href="plan.html">Mój Plan</a></li>
+                <li><a href="przepisy.html">Przepisy</a></li>
+                <li><a href="dodaj.html">Dodaj Nowy Przepis</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Mój Plan Posiłków</h1>
+        <table>
+            <tr>
+                <th>Dzień</th>
+                <th>Śniadanie</th>
+                <th>Obiad</th>
+                <th>Kolacja</th>
+            </tr>
+            <tr>
+                <td>Poniedziałek</td>
+                <td><input type="text" id="pon-sniadanie"></td>
+                <td><input type="text" id="pon-obiad"></td>
+                <td><input type="text" id="pon-kolacja"></td>
+            </tr>
+            <tr>
+                <td>Wtorek</td>
+                <td><input type="text" id="wt-sniadanie"></td>
+                <td><input type="text" id="wt-obiad"></td>
+                <td><input type="text" id="wt-kolacja"></td>
+            </tr>
+            <tr>
+                <td>Sroda</td>
+                <td><input type="text" id="wt-sniadanie"></td>
+                <td><input type="text" id="wt-obiad"></td>
+                <td><input type="text" id="wt-kolacja"></td>
+            </tr>
+            <tr>
+                <td>Czwartek</td>
+                <td><input type="text" id="wt-sniadanie"></td>
+                <td><input type="text" id="wt-obiad"></td>
+                <td><input type="text" id="wt-kolacja"></td>
+            </tr>
+            <tr>
+                <td>Piatek</td>
+                <td><input type="text" id="wt-sniadanie"></td>
+                <td><input type="text" id="wt-obiad"></td>
+                <td><input type="text" id="wt-kolacja"></td>
+            </tr>
+            <tr>
+                <td>Sobota</td>
+                <td><input type="text" id="wt-sniadanie"></td>
+                <td><input type="text" id="wt-obiad"></td>
+                <td><input type="text" id="wt-kolacja"></td>
+            </tr>
+            <tr>
+                <td>Niedziela</td>
+                <td><input type="text" id="wt-sniadanie"></td>
+                <td><input type="text" id="wt-obiad"></td>
+                <td><input type="text" id="wt-kolacja"></td>
+            </tr>
+            
+        </table>
+        <button onclick="zapiszPlan()">Zapisz Plan</button>
+    </main>
+</body>
+</html>
