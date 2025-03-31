@@ -5,19 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mój Plan</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="lesson1.js"></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Strona Główna</a></li>
-                <li><a href="plan.html">Mój Plan</a></li>
-                <li><a href="przepisy.html">Przepisy</a></li>
-                <li><a href="dodaj.html">Dodaj Nowy Przepis</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Strona Główna</a></li>
+            <li><a href="plan.html">Mój Plan</a></li>
+            <li><a href="przepisy.html">Przepisy</a></li>
+            <li><a href="dodaj.html">Dodaj Nowy Przepis</a></li>
+        </ul>
+    </nav>
+
     <main>
         <h1>Mój Plan Posiłków</h1>
         <table>
@@ -40,38 +38,82 @@
                 <td><input type="text" id="wt-kolacja"></td>
             </tr>
             <tr>
-                <td>Sroda</td>
-                <td><input type="text" id="wt-sniadanie"></td>
-                <td><input type="text" id="wt-obiad"></td>
-                <td><input type="text" id="wt-kolacja"></td>
+                <td>Środa</td>
+                <td><input type="text" id="sr-sniadanie"></td>
+                <td><input type="text" id="sr-obiad"></td>
+                <td><input type="text" id="sr-kolacja"></td>
             </tr>
             <tr>
                 <td>Czwartek</td>
-                <td><input type="text" id="wt-sniadanie"></td>
-                <td><input type="text" id="wt-obiad"></td>
-                <td><input type="text" id="wt-kolacja"></td>
+                <td><input type="text" id="cz-sniadanie"></td>
+                <td><input type="text" id="cz-obiad"></td>
+                <td><input type="text" id="cz-kolacja"></td>
             </tr>
             <tr>
-                <td>Piatek</td>
-                <td><input type="text" id="wt-sniadanie"></td>
-                <td><input type="text" id="wt-obiad"></td>
-                <td><input type="text" id="wt-kolacja"></td>
+                <td>Piątek</td>
+                <td><input type="text" id="pi-sniadanie"></td>
+                <td><input type="text" id="pi-obiad"></td>
+                <td><input type="text" id="pi-kolacja"></td>
             </tr>
             <tr>
                 <td>Sobota</td>
-                <td><input type="text" id="wt-sniadanie"></td>
-                <td><input type="text" id="wt-obiad"></td>
-                <td><input type="text" id="wt-kolacja"></td>
+                <td><input type="text" id="so-sniadanie"></td>
+                <td><input type="text" id="so-obiad"></td>
+                <td><input type="text" id="so-kolacja"></td>
             </tr>
             <tr>
                 <td>Niedziela</td>
-                <td><input type="text" id="wt-sniadanie"></td>
-                <td><input type="text" id="wt-obiad"></td>
-                <td><input type="text" id="wt-kolacja"></td>
+                <td><input type="text" id="nd-sniadanie"></td>
+                <td><input type="text" id="nd-obiad"></td>
+                <td><input type="text" id="nd-kolacja"></td>
             </tr>
-            
         </table>
         <button onclick="zapiszPlan()">Zapisz Plan</button>
     </main>
+
+    <script>
+        function zapiszPlan() {
+            const plan = {
+                poniedzialek: {
+                    sniadanie: document.getElementById("pon-sniadanie").value,
+                    obiad: document.getElementById("pon-obiad").value,
+                    kolacja: document.getElementById("pon-kolacja").value
+                },
+                wtorek: {
+                    sniadanie: document.getElementById("wt-sniadanie").value,
+                    obiad: document.getElementById("wt-obiad").value,
+                    kolacja: document.getElementById("wt-kolacja").value
+                },
+                sroda: {
+                    sniadanie: document.getElementById("sr-sniadanie").value,
+                    obiad: document.getElementById("sr-obiad").value,
+                    kolacja: document.getElementById("sr-kolacja").value
+                },
+                czwartek: {
+                    sniadanie: document.getElementById("cz-sniadanie").value,
+                    obiad: document.getElementById("cz-obiad").value,
+                    kolacja: document.getElementById("cz-kolacja").value
+                },
+                piatek: {
+                    sniadanie: document.getElementById("pi-sniadanie").value,
+                    obiad: document.getElementById("pi-obiad").value,
+                    kolacja: document.getElementById("pi-kolacja").value
+                },
+                sobota: {
+                    sniadanie: document.getElementById("so-sniadanie").value,
+                    obiad: document.getElementById("so-obiad").value,
+                    kolacja: document.getElementById("so-kolacja").value
+                },
+                niedziela: {
+                    sniadanie: document.getElementById("nd-sniadanie").value,
+                    obiad: document.getElementById("nd-obiad").value,
+                    kolacja: document.getElementById("nd-kolacja").value
+                }
+            };
+
+            localStorage.setItem("planPosilkow", JSON.stringify(plan));
+            alert("Plan posiłków zapisany!");
+        }
+    </script>
 </body>
 </html>
