@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Przepisy</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -17,10 +17,58 @@
                 <li><a href="dodaj.html">Dodaj Nowy Przepis</a></li>
             </ul>
         </nav>
-    </header>
-    <main>
         <h1>Lista Przepisów</h1>
-        <ul id="listaPrzepisow"></ul>
+    </header>
+
+    <main>
+        <div id="recipe-list">
+            <p>Brak dodanych przepisów.</p>
+        </div>
     </main>
+
+    <script>
+        // Przykładowe przepisy
+        const recipes = [
+            {
+                name: "Makaron z sosem pomidorowym",
+                ingredients: ["makaron", "sos pomidorowy", "czosnek", "cebula"],
+                instructions: "Ugotuj makaron, podsmaż czosnek i cebulę, dodaj sos pomidorowy."
+            },
+            {
+                name: "Sałatka grecka",
+                ingredients: ["sałata", "pomidor", "ogórek", "feta"],
+                instructions: "Pokrój warzywa, dodaj fetę i polej oliwą z oliwek."
+            }
+        ];
+
+        // Funkcja do wyświetlania przepisów
+        function displayRecipes() {
+            const recipeList = document.getElementById('recipe-list');
+            recipeList.innerHTML = ''; // Czyści listę przepisów
+
+            if (recipes.length === 0) {
+                recipeList.innerHTML = '<p>Brak dodanych przepisów.</p>';
+                return;
+            }
+
+            recipes.forEach(recipe => {
+                const recipeItem = document.createElement('div');
+                recipeItem.className = 'recipe-item';
+                recipeItem.innerHTML = `
+                    <h2>${recipe.name}</h2>
+                    <h3>Składniki:</h3>
+                    <ul>
+                        ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+                    </ul>
+                    <h3>Instrukcje:</h3>
+                    <p>${recipe.instructions}</p>
+                `;
+                recipeList.appendChild(recipeItem);
+            });
+        }
+
+        // Wywołanie funkcji po załadowaniu strony
+        window.onload = displayRecipes;
+    </script>
 </body>
 </html>
