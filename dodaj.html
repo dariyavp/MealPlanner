@@ -3,35 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodaj Nowy Przepis</title>
+    <title>Dodaj Przepis</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="lesson1.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Strona Główna</a></li>
+            <li><a href="plan.html">Mój Plan</a></li>
+            <li><a href="przepisy.html">Przepisy</a></li>
+            <li><a href="dodaj.html">Dodaj Nowy Przepis</a></li>
+        </ul>
+    </nav>
+
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Strona Główna</a></li>
-                <li><a href="plan.html">Mój Plan</a></li>
-                <li><a href="przepisy.html">Przepisy</a></li>
-                <li><a href="dodaj.html">Dodaj Nowy Przepis</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
         <h1>Dodaj Nowy Przepis</h1>
-        <form id="formularzPrzepisu">
-            <label>Nazwa przepisu:</label>
-            <input type="text" id="nazwa" required>
+    </header>
+
+    <form id="recipe-form">
+        <label for="title">Nazwa przepisu:</label>
+        <input type="text" id="title" required>
+
+        <label for="ingredients">Składniki (oddzielaj składniki przecinkiem):</label>
+        <textarea id="ingredients" required></textarea>
+
+        <label for="instructions">Instrukcje:</label>
+        <textarea id="instructions" required></textarea>
+
+        <button type="submit">Dodaj Przepis</button>
+    </form>
+
+    <ul id="recipe-list"></ul>
+
+    <script>
+        
+        function displayRecipes() {
+            const recipeList = document.getElementById('recipe-list');
+            recipeList.innerHTML = ''; // Czyści listę przepisów
+
+            const recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+            recipes.forEach((recipe, index) => {
+                const recipeItem = document.createElement('li');
+                recipeItem.className = 'recipe-item';
+                recipeItem.innerHTML = `
+                    <strong>${index + 1}. ${recipe.title}</strong><br>
+                    <strong>Składniki:</strong><br>
+                    <ul>
+                        ${recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+                    </ul>
+                    <strong>Instrukcje:</strong><br>
+                    <p>${recipe.instructions}</p>
+                    <button onclick="editRecipe(${index})">Edytuj</button>
+                    <button onclick="deleteRecipe(${index})">Usuń</button>
+                `;
+                recipeList.appendChild(recipeItem);
+            });
+        }
+        // Obsługuje dodawanie przepisu
+        document.getElementById('recipe-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const ingredientsText = document.getElementById('ingredients').value;
+            const instructions = document.getElementById('instructions').value;
+
+            // Rozdziel składniki na tablicę
+            const ingredients = ingredientsText.split(',').map(ingredient => ingredient.trim());
+
+            const newRecipe = {
+                title: title,
+                ingredients: ingredients,
+                instructions: instructions
+            };
+
+            // Pobierz istniejące przepisy z localStorage
+            const recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+
+            // Dodaj nowy przepis do tablicy
+            recipes.push(newRecipe);
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+
+            // Wyczyść formularz
+            document.getElementById('recipe-form').reset();
+            displayRecipes(); // Wyświetl zaktualizowaną listę przepisów
+            alert('Przepis został dodany!');
+        });
+
+       
+        function editRecipe(index) {
+            const recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+            const recipe = recipes[index];
+
+            document.getElementById('title').value = recipe.title;
+            document.getElementById('ingredients').value = recipe.ingredients.join(', ');
+            document.getElementById('instructions').value = recipe.instructions;
+
             
-            <label>Składniki:</label>
-            <textarea id="skladniki" required></textarea>
-            
-            <label>Instrukcje:</label>
-            <textarea id="instrukcje" required></textarea>
-            
-            <button type="submit">Dodaj Przepis</button>
-        </form>
-    </main>
+            deleteRecipe(index);
+        }
+
+        function deleteRecipe(index) {
+            const recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+            recipes.splice(index, 1);
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+
+            displayRecipes(); 
+        }
+
+        
+        window.onload = displayRecipes;
+    </script>
 </body>
 </html>
